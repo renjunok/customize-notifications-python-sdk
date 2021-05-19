@@ -9,10 +9,10 @@ def generateNonceStr():
     return "".join(random.sample('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', 16))
 
 
-def change_type(byte):
-    if isinstance(byte, bytes):
-        return str(byte, encoding="utf-8")
-    return json.JSONEncoder.default(byte)
+# def change_type(byte):
+#     if isinstance(byte, bytes):
+#         return str(byte, encoding="utf-8")
+#     return json.JSONEncoder.default(byte)
 
 
 def SubmitMessageRequest(sm):
@@ -21,13 +21,13 @@ def SubmitMessageRequest(sm):
 
     headers = {'content-type': 'application/json'}
     try:
-        r = requests.post("https://api.msg.launch.im/message", data=json_str, headers=headers)
+        resp = requests.post("https://api.msg.launch.im/message", data=json_str, headers=headers)
     except ConnectionError as err:
         # handle err
         print(err)
 
     # examine response
-    data = json.loads(r.content)
+    data = json.loads(resp.content)
     print(data)
 
 
